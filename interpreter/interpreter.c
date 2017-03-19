@@ -116,6 +116,16 @@ void inst_jump(struct VMContext* ctx, const uint32_t instr){
 
 void inst_puts(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t b = EXTRACT_B1(instr);
+	uint32_t* addr = (uint32_t*)(ctx->heap + ctx->r[b].value);
+	char ch;
+
+	while(true){
+		ch = *addr;
+		if(ch == '\0')
+			break;
+		printf("%c", ch);
+		addr++;
+	}
 	printf("%s", (char*)(ctx->heap + ctx->r[b].value));
 	printf("puts %d\n", b);
 }
