@@ -15,7 +15,7 @@ static bool is_running = true;
 
 // Instruction functions
 void inst_halt(struct VMContext* ctx, const uint32_t instr){
-	printf("halti\n");
+	printf("halt\n");
 	exit(0);
 }
 
@@ -30,21 +30,21 @@ void inst_store(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t b = EXTRACT_B1(instr);
 	const uint8_t c = EXTRACT_B2(instr);
 	*(ctx->heap + ctx->r[b].value) = EXTRACT_B0(ctx->r[c].value); 		
-	printf("stroe %d, %d\n", b, c);
+	printf("store %d, %d\n", b, c);
 }
 
 void inst_move(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t b = EXTRACT_B1(instr);
 	const uint8_t c = EXTRACT_B2(instr);
 	ctx->r[b].value = ctx->r[c].value;
-	printf("move %d,%d\n", b, c);
+	printf("move %d, %d\n", b, c);
 }
 
 void inst_puti(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t b = EXTRACT_B1(instr);
 	const uint8_t c = EXTRACT_B2(instr);
 	ctx->r[b].value = (uint32_t)c;
-	printf("puti %d,%d\n", b, c);
+	printf("puti %d, %d\n", b, c);
 }
 
 void inst_add(struct VMContext* ctx, const uint32_t instr){
@@ -141,7 +141,7 @@ void inst_gets(struct VMContext* ctx, const uint32_t instr){
 		}
 		addr++;
 	}
-	printf("get %d\n", b);
+	printf("gets %d\n", b);
 }
 
 
