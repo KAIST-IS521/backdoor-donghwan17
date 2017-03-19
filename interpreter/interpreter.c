@@ -126,7 +126,6 @@ void inst_puts(struct VMContext* ctx, const uint32_t instr){
 		printf("%c", ch);
 		addr++;
 	}
-	printf("%s", (char*)(ctx->heap + ctx->r[b].value));
 	printf("puts %d\n", b);
 }
 
