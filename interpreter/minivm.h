@@ -19,6 +19,7 @@
 
 #define MVM_NUM_REGISTERS 16 // Default
 
+#define HEAP_SIZE 8192 // Default Heap memory size
 
 //---------------------------------------------------------
 // DATA STRUCTURES & TYPEDEFS:
@@ -38,6 +39,9 @@ typedef struct VMContext {
     uint32_t numFuns;
     Reg* r;           // Ptr to register array.
     FunPtr* funtable; // Ptr to a funptr table.
+	uint32_t* heap; // Ptr to a heap memory
+	uint32_t instrIdx // Ptr to a instruction index
+
 } VMContext;
 
 
