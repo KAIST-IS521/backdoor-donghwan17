@@ -2,10 +2,10 @@
 
 The program get a text string from a user, and print a simple cipher text. In a cipher process, each value of the input text is decreased by 2. 
 
-# Example
+# Example 1
 - input : abcdefghijklmnopqrstuvwxyz
 - output: _`abcdefghijklmnopqrstuvwx
-
+# Example 2
 - input : [IS521]Hello,I_finished_HW.
 - output: YGQ30/[Fcjjm*G]dglgqfcb]FU,
 
