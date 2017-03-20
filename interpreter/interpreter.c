@@ -14,7 +14,7 @@ static bool is_running = true;
 
 
 // Instruction functions
-void inst_halt(struct VMContext* ctx, const uint32_t instr){
+void inst_halt(struct VMContext* ctx __attribute__((unused)), const uint32_t instr __attribute__((unused))){
 	exit(0);
 }
 
@@ -191,7 +191,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-	int len;
+	uint32_t len;
 	fseek(bytecode, 0, SEEK_END);
 	len = ftell(bytecode);
 	pc = (uint32_t*)malloc(len);
@@ -200,9 +200,11 @@ int main(int argc, char** argv) {
 
 	while (is_running) {
         // TODO: Read 4-byte bytecode, and set the pc accordingly
-		if(vm.instrIdx < 0 || vm.instrIdx > len/4){
+		if(vm.instrIdx > len/4){
 			perror("An instruction index is out of the boundary\n");
-			break;
+			free(pc);
+			fclose(bytecode);
+			return 1;
 		}
 		stepVMContext(&vm, &pc);
     }
