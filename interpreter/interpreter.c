@@ -13,7 +13,7 @@
 static bool is_running = true;
 
 
-// Instruction functions
+// 14 Instruction functions
 void inst_halt(struct VMContext* ctx __attribute__((unused)), const uint32_t instr __attribute__((unused))){
 	exit(0);
 }
@@ -191,6 +191,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+	// Read a input file and set pc
 	uint32_t len;
 	fseek(bytecode, 0, SEEK_END);
 	len = ftell(bytecode);
@@ -200,6 +201,7 @@ int main(int argc, char** argv) {
 
 	while (is_running) {
         // TODO: Read 4-byte bytecode, and set the pc accordingly
+		// If instrIdx is out of the bound with jump instr, it terminate
 		if(vm.instrIdx > len/4){
 			perror("An instruction index is out of the boundary\n");
 			free(pc);
