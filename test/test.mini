@@ -1,0 +1,69 @@
+puti r0, 0
+puti r1, 1
+puti r2, 2
+puti r3, 3
+puti r4, 4
+puti r5, 5
+puti r6, 6
+puti r10, 'T'
+puti r11, 'e'
+puti r12, 'x'
+puti r13, 't'
+puti r14, ':'
+puti r15, 0x20
+puti r16, 0x00
+store r0, r10
+store r1, r11
+store r2, r12
+store r3, r13
+store r4, r14
+store r5, r15
+store r6, r16
+puts r0
+puti r50, 50
+gets r50
+load r60, r50
+eq r8, r60, r16
+ite r8, 31, 27
+sub r60, r60, r2
+store r50, r60
+add r50, r50, r1
+jump 24
+puti r80, 'C'
+puti r81, 'i'
+puti r82, 'p'
+puti r83, 'h'
+puti r84, 'e'
+puti r85, 'r'
+puti r100, 100
+puti r101, 101
+puti r102, 102
+puti r103, 103
+puti r104, 104
+puti r105, 105
+puti r106, 106
+puti r107, 107
+puti r108, 108
+puti r109, 109
+puti r110, 110
+puti r111, 111
+puti r112, 112
+puti r113, 113
+store r100, r80
+store r101, r81
+store r102, r82
+store r103, r83
+store r104, r84
+store r105, r85
+store r106, r15
+store r107, r10
+store r108, r11
+store r109, r12
+store r110, r13
+store r111, r14
+store r112, r15
+store r113, r16
+puts r100
+puti r50, 50
+puts r50
+halt
