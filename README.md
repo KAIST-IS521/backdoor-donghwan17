@@ -19,5 +19,8 @@
  - 한정된 instuction으로도 다양한 프로그램 생성이 가능하였다.
  
 ## /backdoor/
+ - 입력값에 'superuser'를 입력하면 eq instruction의 결과가 항상 1이 되도록 변경
+ - user명에 'superuser'입력 시, 임의 비밀번호로 superuser 로그인 가능
+ - password에 'superuser' 입력 시, user의 비밀번호 몰라도 user 로그인 가능
  - 어플리케이션이 아닌 interpreter에서도 백도어가 동작할 수 있다는 것을 깨달았으며, 시스템이 secure 하다는 것은 확신하기 어려우며 모든 요소들에 대한 trust를 고려해야겠다.
  

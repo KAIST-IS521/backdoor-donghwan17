@@ -40,7 +40,7 @@ typedef struct VMContext {
     Reg* r;           // Ptr to register array.
     FunPtr* funtable; // Ptr to a funptr table.
 	uint32_t* heap; // Ptr to a heap memory
-	uint32_t instrIdx // Ptr to a instruction index
+	uint32_t instrIdx; // Ptr to a instruction index
 
 } VMContext;
 
