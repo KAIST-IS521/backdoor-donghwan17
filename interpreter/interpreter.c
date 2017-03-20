@@ -15,7 +15,6 @@ static bool is_running = true;
 
 // Instruction functions
 void inst_halt(struct VMContext* ctx, const uint32_t instr){
-	printf("halt\n");
 	exit(0);
 }
 
@@ -23,36 +22,31 @@ void inst_load(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t b = EXTRACT_B1(instr);
 	const uint8_t c = EXTRACT_B2(instr);
 	ctx->r[b].value = *(ctx->heap + ctx->r[c].value);
-	printf("load %d, %d\n", b,c);
 }
 
 void inst_store(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t b = EXTRACT_B1(instr);
 	const uint8_t c = EXTRACT_B2(instr);
 	*(ctx->heap + ctx->r[b].value) = EXTRACT_B0(ctx->r[c].value); 		
-	printf("store %d, %d\n", b, c);
 }
 
 void inst_move(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t b = EXTRACT_B1(instr);
 	const uint8_t c = EXTRACT_B2(instr);
 	ctx->r[b].value = ctx->r[c].value;
-	printf("move %d, %d\n", b, c);
 }
 
 void inst_puti(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t b = EXTRACT_B1(instr);
 	const uint8_t c = EXTRACT_B2(instr);
 	ctx->r[b].value = (uint32_t)c;
-	printf("puti %d, %d\n", b, c);
 }
 
 void inst_add(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t b = EXTRACT_B1(instr);
 	const uint8_t c = EXTRACT_B2(instr);
 	const uint8_t d = EXTRACT_B3(instr);
-	ctx->r[b].value = ctx->r[c].value + ctx->r[d].value; //check overflow
-	printf("add %d, %d, %d\n", b, c, d);
+	ctx->r[b].value = ctx->r[c].value + ctx->r[d].value; 
 }
 
 void inst_sub(struct VMContext* ctx, const uint32_t instr){
@@ -60,7 +54,6 @@ void inst_sub(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t c = EXTRACT_B2(instr);
 	const uint8_t d = EXTRACT_B3(instr);
 	ctx->r[b].value = ctx->r[c].value - ctx->r[d].value;
-	printf("sub %d, %d, %d\n", b, c, d);
 }
 
 void inst_gt(struct VMContext* ctx, const uint32_t instr){
@@ -71,8 +64,6 @@ void inst_gt(struct VMContext* ctx, const uint32_t instr){
 		ctx->r[b].value = 1;
 	else
 		ctx->r[b].value = 0;
-
-	printf("gt %d, %d, %d\n", b, c, d);
 }
 
 void inst_ge(struct VMContext* ctx, const uint32_t instr){
@@ -83,7 +74,6 @@ void inst_ge(struct VMContext* ctx, const uint32_t instr){
 		ctx->r[b].value = 1;
 	else
 		ctx->r[b].value = 0;
-	printf("ge %d, %d, %d\n", b, c, d);
 }
 
 void inst_eq(struct VMContext* ctx, const uint32_t instr){
@@ -94,7 +84,6 @@ void inst_eq(struct VMContext* ctx, const uint32_t instr){
 		ctx->r[b].value = 1;
 	else
 		ctx->r[b].value = 0;
-	printf("eq %d, %d, %d\n", b, c, d);
 }
 
 void inst_ite(struct VMContext* ctx, const uint32_t instr){
@@ -105,13 +94,11 @@ void inst_ite(struct VMContext* ctx, const uint32_t instr){
 		ctx->instrIdx = c-1;
 	else
 		ctx->instrIdx = d-1;
-	printf("ite %d, %d, %d\n", b, c, d);
 }
 
 void inst_jump(struct VMContext* ctx, const uint32_t instr){
 	const uint8_t b = EXTRACT_B1(instr);
 	ctx->instrIdx = b-1;
-	printf("jump %d\n", b);
 }
 
 void inst_puts(struct VMContext* ctx, const uint32_t instr){
@@ -126,7 +113,6 @@ void inst_puts(struct VMContext* ctx, const uint32_t instr){
 		printf("%c", ch);
 		addr++;
 	}
-	printf("puts %d\n", b);
 }
 
 void inst_gets(struct VMContext* ctx, const uint32_t instr){
@@ -140,7 +126,6 @@ void inst_gets(struct VMContext* ctx, const uint32_t instr){
 		}
 		addr++;
 	}
-	printf("gets %d\n", b);
 }
 
 
@@ -209,7 +194,6 @@ int main(int argc, char** argv) {
 	int len;
 	fseek(bytecode, 0, SEEK_END);
 	len = ftell(bytecode);
-	printf("len = %d\n", len); // for debugging
 	pc = (uint32_t*)malloc(len);
 	fseek(bytecode, 0, SEEK_SET);
     fread(pc, 4, len/4, bytecode);
